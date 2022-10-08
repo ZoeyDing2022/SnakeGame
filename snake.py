@@ -4,15 +4,16 @@ UP = 90
 DOWN = 270
 LEFT = 180
 RIGHT = 0
+starting_positions = [(0, 0), (-20, 0), (-40, 0)]
 
 class Snake:
     def __init__(self):
         self.segments = []
-        starting_positions = [(0, 0), (-20, 0), (-40, 0)]
+        self.create_snake()
+        self.head = self.segments[0]
+    def create_snake(self):
         for position in starting_positions:
             self.add_segment(position)
-        self.head = self.segments[0]
-
     def add_segment(self, position):
         segment = Turtle(shape="square")
         segment.color("white")
@@ -47,3 +48,10 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000,1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
